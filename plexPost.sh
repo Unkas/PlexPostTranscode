@@ -9,4 +9,4 @@ PLEXFN=$(basename "$1")
 WORKDIR=$(dirname "$1")
 JOBID=$(basename "$WORKDIR")
 
-echo "${PLEXFN" > "${QUEUEDIR}/${JOBID}.job
+echo "${PLEXFN}" > "${QUEUEDIR}/${JOBID}.job"
