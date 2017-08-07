@@ -34,6 +34,7 @@ ENV TZ=America/New_York \
 
 VOLUME ["$POSTDATA", "$QUEUEDIR", "$TVDIR", "$MVDIR"]
 
-COPY bin /postproc/bin
+COPY src/plexProcess /postproc/bin
+COPY src/queueProcess /usr/local/bin
 
 #ENTRYPOINT ["/postproc/bin/queueman-run.sh"]
