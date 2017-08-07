@@ -17,6 +17,23 @@ RUN set -ex \
     && rm -rf /var/lib/apt/lists/* \
     && gem install video_transcoding -v "$GEM_VERSION"
 
-VOLUME /sripts
+ENV TZ=America/New_York \
+    TRANSCODE_UID=1001 \
+    TRANSCODE_GID=1003 \
+    TRANSCODE_USER=transcode \
+    TRANSCODE_GROUP=transcode \
+    TVDIR=/media/TV \
+    MVDIR=/media/Movies \
+    POSTDATA=/postproc \
+    QUEUEDIR=/postproc/queue \
+    QUEUETIMER=600 \
+    QUEUEDAYS=60 \
+    REMOVETS=0 \
+    TSCLEAN=1 \
+    TSDAYS=60
 
-COPY    
+VOLUME ["$POSTDATA", "$QUEUEDIR", "$TVDIR", "$MVDIR"]
+
+COPY bin /postproc/bin
+
+#ENTRYPOINT ["/postproc/bin/queueman-run.sh"]
