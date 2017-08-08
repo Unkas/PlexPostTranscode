@@ -23,11 +23,7 @@ transcode_video () {
     shift
     nice transcode-video "$INFILE" -o "$OUTFILE"
 }
-#*******Delete these lines***********
-QUEUEDIR="/home/tie/plex/postproc/queue"
-TVDIR="/datastore/video/TV Shows"
-MVDIR="/datastore/video/Movies"
-#*******Delete these lines***********
+
 [ -f ${QUEUEDIR}/.debug ] && set -x
 QE=$1
 QF=${QUEUEDIR}/${QE}.job
@@ -84,7 +80,7 @@ fi
 if [ ! -f "${IF}" ];then
     die "ERROR: Input file does not exist: ${IF}"
 fi
-do_log "${IF} ${WF1}"
+do_log "Linking: ${IF} ${WF1}"
 # link .ts file to working-dir/source.ts
 ln -sf "${IF}" "${WF1}" || die "ERROR: failed to link ${WF1}"
 
