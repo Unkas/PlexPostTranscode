@@ -27,7 +27,7 @@ ENV TZ=America/New_York \
     MVDIR=/media/Movies \
     POSTSCRIPTS="${POSTDATA}/bin" \
     QUEUEDIR="${POSTDATA}/queue" \
-    QUEUEPROCESS=/usr/local/bin \
+    QUEUEPROCESS=/usr/local/bin/plexTranscode \
     QUEUETIMER=600 \
     QUEUEDAYS=60 \
     REMOVETS=0 \
@@ -39,4 +39,4 @@ VOLUME ["$POSTSCRIPTS", "$QUEUEDIR", "$TVDIR", "$MVDIR"]
 COPY src/plexProcess "$POSTSCRIPTS"
 COPY src/queueProcess "$QUEUEPROCESS"
 
-#ENTRYPOINT ["${QUEUEPROCESS}/queueman-run.sh"]
+ENTRYPOINT ["${QUEUEPROCESS}/queueman-run.sh"]
