@@ -1,0 +1,2 @@
+#!/bin/bash
+exec s6-setuidgid abc /postproc/bin/queueman.sh

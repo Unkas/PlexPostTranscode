@@ -1,4 +1,4 @@
-FROM ntodd/ruby-xenial:2.4.0
+FROM unkas/lsio-ruby
 LABEL maintainer="Paul Snell"
 
 ENV GEM_VERSION 0.17.3
@@ -17,17 +17,8 @@ RUN set -ex \
     && rm -rf /var/lib/apt/lists/* \
     && gem install video_transcoding -v "$GEM_VERSION"
 
-ADD "https://github.com/just-containers/s6-overlay/releases/download/v1.19.1.1/s6-overlay-amd64.tar.gz" /tmp/
-RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C /
-RUN sed -i "s/s6-nuke -th/s6-nuke -t/" /etc/s6/init/init-stage3
-
 ENV POSTDATA=/postproc
-ENV TZ=America/New_York \
-    TRANSCODE_UID=1001 \
-    TRANSCODE_GID=1003 \
-    TRANSCODE_USER=transcode \
-    TRANSCODE_GROUP=transcode \
-    TVDIR=/media/TV \
+ENV TVDIR=/media/TV \
     MVDIR=/media/Movies \
     POSTSCRIPTS="${POSTDATA}/bin" \
     QUEUEDIR="${POSTDATA}/queue" \
@@ -42,7 +33,8 @@ VOLUME ["$POSTSCRIPTS", "$QUEUEDIR", "$TVDIR", "$MVDIR"]
 
 COPY src/plexProcess /postproc/bin
 COPY src/queueProcess /usr/local/bin/plexTranscode
+COPY src/services /etc/services.d/transcodeQueue
 
-CMD [ "/init" ]
+#CMD [ "/init" ]
 
 #ENTRYPOINT ["$QUEUEPROCESS"/queueman-run.sh]
