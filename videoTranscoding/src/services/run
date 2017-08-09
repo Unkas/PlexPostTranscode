@@ -1,2 +1,2 @@
 #!/bin/bash
-exec s6-setuidgid abc /postproc/bin/queueman.sh
+exec s6-setuidgid abc /usr/local/bin/plexTranscode/queueman.sh
