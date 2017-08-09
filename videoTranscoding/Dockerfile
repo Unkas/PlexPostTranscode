@@ -17,6 +17,10 @@ RUN set -ex \
     && rm -rf /var/lib/apt/lists/* \
     && gem install video_transcoding -v "$GEM_VERSION"
 
+ADD "https://github.com/just-containers/s6-overlay/releases/download/v1.19.1.1/s6-overlay-amd64.tar.gz" /tmp/
+RUN tar xzf /tmp/s6-overlay-amd64.tar.gz -C /
+RUN sed -i "s/s6-nuke -th/s6-nuke -t/" /etc/s6/init/init-stage3
+
 ENV POSTDATA=/postproc
 ENV TZ=America/New_York \
     TRANSCODE_UID=1001 \
@@ -36,7 +40,9 @@ ENV TZ=America/New_York \
 
 VOLUME ["$POSTSCRIPTS", "$QUEUEDIR", "$TVDIR", "$MVDIR"]
 
-COPY src/plexProcess "$POSTSCRIPTS"
-COPY src/queueProcess "$QUEUEPROCESS"
+COPY src/plexProcess /postproc/bin
+COPY src/queueProcess /usr/local/bin/plexTranscode
 
-ENTRYPOINT ["${QUEUEPROCESS}/queueman-run.sh"]
+CMD [ "/init" ]
+
+#ENTRYPOINT ["$QUEUEPROCESS"/queueman-run.sh]
