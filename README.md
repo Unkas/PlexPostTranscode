@@ -21,7 +21,7 @@ This image needs access to your media files to figure out where to put the trans
 
 ```
 docker create --name plexTranscode \
-    -e UID=<UID> -e GID=<GID> \
+    -e PUID=<UID> -e PGID=<GID> \
     -v </path/to/tvshows>:/media/TV \
     -v </path/to/movies>:/media/Movies \
     -v </path/to/postproc>:/postproc \
