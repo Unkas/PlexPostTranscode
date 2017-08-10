@@ -25,5 +25,5 @@ docker create --name plexTranscode \
     -v </path/to/tvshows>:/media/TV \
     -v </path/to/movies>:/media/Movies \
     -v </path/to/postproc>:/postproc \
-    unkas:plextranscode
+    unkas/plexposttranscode
 ```
