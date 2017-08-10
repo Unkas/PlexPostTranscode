@@ -15,7 +15,7 @@ The real reason for this project.  Instead of using the Handbrake CLI, this prog
 This docker image used comskip and only HandBrake CLI to queue up recorded Plex media files and transcode them.  I simplfied the process of getting the docker image instead of having to build it, tore out ComSkip for now, and replaced the HandBrake CLI with transcode-video.  
 
 ## Working with Plex
-This image needs access to your media files to figure out where to put the transcoded files.  The plexpost volume should also be mounted to plex.  Go to the DVR settings in Plex and enter /plexpost/bin/plexPost.sh as the post processing script.
+This image needs access to your media files to figure out where to put the transcoded files.  The plexpost volume should also be mounted to plex.  Go to the DVR settings in Plex and enter /postproc/bin/plexPost.sh as the post processing script.
 
 ## Usage
 
@@ -24,6 +24,6 @@ docker create --name plexTranscode \
     -e UID=<UID> -e GID=<GID> \
     -v </path/to/tvshows>:/media/TV \
     -v </path/to/movies>:/media/Movies \
-    -v </path/to/plexPost>:/plexpost \
+    -v </path/to/postproc>:/postproc \
     unkas:plextranscode
-'''
+```

@@ -29,12 +29,6 @@ ENV TVDIR=/media/TV \
     TSCLEAN=1 \
     TSDAYS=60
 
-#VOLUME ["$POSTSCRIPTS", "$QUEUEDIR", "$TVDIR", "$MVDIR"]
 
-#COPY src/plexProcess /postproc/bin
-#COPY src/queueProcess /usr/local/bin/plexTranscode
-#COPY src/services /etc/services.d/transcodeQueue
 COPY root/ /
-#CMD [ "/init" ]
 
-#ENTRYPOINT ["$QUEUEPROCESS"/queueman-run.sh]
