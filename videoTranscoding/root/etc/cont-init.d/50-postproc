@@ -1,0 +1,4 @@
+#!/bin/bash
+
+mkdir -p /postproc/{bin,queue}
+cp /usr/local/bin/plexTranscode/plexPost.sh /postproc/bin/
