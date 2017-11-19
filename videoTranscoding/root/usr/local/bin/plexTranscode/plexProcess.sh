@@ -21,7 +21,7 @@ transcode_video () {
     typeset OUTFILE="$2"
     shift
     shift
-    nice transcode-video "$INFILE" -o "$OUTFILE"
+    nice transcode-video --target small --crop detect --fallback-crop none "$INFILE" -o "$OUTFILE"
 }
 
 [ -f ${QUEUEDIR}/.debug ] && set -x
@@ -95,7 +95,7 @@ if [ $((${OLDSZ}/10 > ${NEWSZ})) -ne 0 ]; then
 fi
 # move transcoded.mkv to target-dir/{FN}.mkv
 mv "${WF4}" "${OF}" || die "ERROR: failed to move transcoded output to ${OF}"
-
+mv "${IF}" "${OFTS}"
 if [ "${REMOVETS}" = "1" ];then
     rm "${OFTS}"
 fi

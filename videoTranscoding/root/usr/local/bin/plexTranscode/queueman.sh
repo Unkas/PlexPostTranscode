@@ -40,7 +40,7 @@ daily_cleanup() {
         echo "Stale working queue entry found: $(basename ${FN})"
         alerter "Stale working queue entry found: $(basename ${FN})" "${FN}" "Queue Entry"
     done
-    find ${QUEUEDIR} -maxdepth 1 -mtime +${QUEUEDAYS:-60} -name '*.done' | while read FN; do
+    find ${QUEUEDIR} -maxdepth 1 -mtime +${QUEUEDAYS:-60} -name '*.save' | while read FN; do
         do_log "Removing ${FN}"
         [ -f "${FN}" ] && rm "${FN}"
     done

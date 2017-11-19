@@ -1,4 +1,6 @@
 #!/bin/bash
 
 mkdir -p /postproc/{bin,queue}
+chown -R abc:abc /postproc
+chown -R abc:abc /usr/local/bin/plexTranscode
 cp /usr/local/bin/plexTranscode/plexPost.sh /postproc/bin/
